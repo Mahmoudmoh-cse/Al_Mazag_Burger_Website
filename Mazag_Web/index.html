@@ -1,0 +1,780 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>المزاج · Al-Mazag Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Tajawal:wght@300;400;700;900&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head><body>
+
+<!-- Custom cursor — own script so dots work even if later scripts error -->
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- ── Scroll progress bar at top of page (don't touch) ── -->
+<div id="prog"></div>
+
+<!-- ── Three.js particle background canvas (don't touch) ── -->
+<canvas id="bg-canvas"></canvas>
+
+
+<!-- ╔══════════════════════════════════════╗
+     ║  TOP NAVIGATION BAR                 ║
+     ╚══════════════════════════════════════╝ -->
+<nav id="nav">
+
+  <!-- RESTAURANT NAME — logo in the nav bar
+       Change "Al" and "-Mazag" below to your restaurant name.
+       The part inside <span> will be orange. -->
+  <div class="logo">Al<span>-Mazag</span></div>
+
+  <div class="nav-right">
+  <!-- Navigation links — change the text between >...</a> if needed.
+       The href="#section" must match the section id below. -->
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav.story">Our Story</a></li>
+    <li><a href="#menu" data-i18n="nav.menu">Menu</a></li>
+    <li><a href="#location" data-i18n="nav.location">Location</a></li>
+    <li><a href="#hotlines" data-i18n="nav.contact">Contact</a></li>
+    <li><a href="#delivery" data-i18n="nav.delivery">Delivery</a></li>
+    <li><a href="#order" class="nav-cta" data-i18n="nav.order">Order Now</a></li>
+  </ul>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" id="btn-lang-en" onclick="setMazagLang('en')">EN</button>
+    <button type="button" id="btn-lang-ar" onclick="setMazagLang('ar')">عربي</button>
+  </div>
+  </div>
+</nav>
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  HERO SECTION — The first big screen visitors see           ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="hero">
+
+  <!-- Background atmosphere glows — don't touch these -->
+  <div class="hero-atm"></div>
+  <div class="hero-atm2"></div>
+
+  <!-- ── ANIMATION ELEMENTS — don't touch these ── -->
+  <div class="hero-glow-ring"></div>
+  <div class="hero-halo"></div>
+  <div class="hero-halo2"></div>
+  <div class="hero-sweep"></div>
+  <div class="hero-scanlines"></div>
+  <div class="hero-grain"></div>
+  <div id="hero-spotlight"></div>
+  <div class="hero-corner hero-corner-tl"></div>
+  <div class="hero-corner hero-corner-tr"></div>
+  <div class="hero-corner hero-corner-bl"></div>
+  <div class="hero-corner hero-corner-br"></div>
+  <div class="hero-bottom-line"></div>
+  <div id="sparks"></div>
+  <!-- ── END ANIMATION ELEMENTS ── -->
+
+  <!-- Floating burger shapes in background — auto-generated, don't touch -->
+  <div class="burger-bg" id="burgerBg"></div>
+
+  <!-- ┌─────────────────────────────────────────────────────────┐
+       │  OWNER PHOTO — The big photo in the hero               │
+       │                                                         │
+       │  HOW TO CHANGE IT:                                      │
+       │  Option A — Use a file from your computer:             │
+       │    1. Put your image in the SAME folder as this file   │
+       │    2. Replace the src="..." with src="yourfile.jpg"    │
+       │    Example: src="omar.png"                             │
+       │                                                         │
+       │  Option B — Use a web link:                            │
+       │    Replace src="..." with your image URL               │
+       └─────────────────────────────────────────────────────────┘ -->
+  <!-- OWNER PHOTO -->
+  <div class="hero-chef-wrap">
+    <img class="hero-chef-img" id="chefImg" loading="eager" fetchpriority="high" decoding="async"
+         src="ImagesWebp/Hero_image_webp.webp"
+         alt="Restaurant Owner — Al-Mazag">
+  </div>
+  <!-- END OWNER PHOTO -->
+
+  <!-- Side and bottom fade overlays — don't touch -->
+  <div class="vign-left"></div>
+  <div class="vign-right"></div>
+  <div class="vign-bottom"></div>
+
+  <!-- ┌─────────────────────────────────────────────────────────┐
+       │  HERO TEXT — The words shown over the owner photo       │
+       └─────────────────────────────────────────────────────────┘ -->
+  <div class="hero-content">
+    <div class="hero-left">
+
+      <!-- HERO TEXT: Small badge at the top — change the text here -->
+      <div class="hero-eyebrow" data-i18n="hero.badge">Est. 2015 · Premium Burgers &amp; Grills</div>
+
+      <!-- HERO TEXT: Big title — first line is orange, second line is outlined
+           Change "Al-Mazag" and "Restaurant" to whatever you want -->
+      <h1 class="hero-title">
+        <span class="accent" data-i18n="hero.title1">Al-Mazag</span><br>
+        <span class="line2" data-i18n="hero.title2">Restaurant</span>
+      </h1>
+
+      <!-- HERO TEXT: Subtitle sentence below the title -->
+      <p class="hero-sub" data-i18n="hero.sub">كل و اتمزج</p>
+
+      <!-- HERO TEXT: Two buttons — change the button labels if needed -->
+      <div class="hero-btns">
+        <a href="#menu"  class="btn-fire" data-i18n="hero.explore">Explore Menu</a>
+        <a href="#order" class="btn-ghost" data-i18n="hero.order">Order Now</a>
+      </div>
+    </div>
+
+    <!-- ┌─────────────────────────────────────────────────────────┐
+         │  STAT NUMBERS — The 3 numbers shown on the right side   │
+         │  These count up when the page loads.                    │
+         │  Change the numbers in the JavaScript section below.    │
+         │  Search for: STAT NUMBER                               │
+         └─────────────────────────────────────────────────────────┘ -->
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="sn1">0</div>
+        <!-- STAT NUMBER label — change the label text -->
+        <div class="hero-stat-lbl" data-i18n="hero.stat1">Years of Fire</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="sn2">0</div>
+        <!-- STAT NUMBER label -->
+        <div class="hero-stat-lbl" data-i18n="hero.stat2">Daily Orders</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="sn3">0%</div>
+        <!-- STAT NUMBER label -->
+        <div class="hero-stat-lbl" data-i18n="hero.stat3">Fresh Ingredients</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint arrow — don't touch -->
+  <div class="scroll-hint" id="scrollHint"><span data-i18n="hero.scroll">Scroll</span><div class="scroll-line"></div></div>
+</section>
+<!-- END HERO SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  ABOUT / OUR STORY SECTION                                  ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="about" class="page-sec">
+  <div class="about-grid">
+
+    <!-- ┌─────────────────────────────────────────────────────────┐
+         │  OWNER PHOTO — Clickable gallery (click to change photo) │
+         │                                                          │
+         │  You can have up to 4 photos here.                      │
+         │  The first photo (aImg) shows by default.               │
+         │  Additional photos are set in JavaScript below.         │
+         │  Search for: OWNER PHOTO GALLERY                        │
+         └─────────────────────────────────────────────────────────┘ -->
+    <!-- OWNER PHOTO — dual cinematic layout -->
+<div class="about-photos-wrap">
+  <!-- Main portrait card -->
+  <div class="about-card-main reveal">
+    <div class="about-card-inner">
+      <img src="ImagesWebp/About_image_1.webp" alt="Chef Omar — Al-Mazag" loading="lazy" decoding="async">
+      <div class="about-card-glow"></div>
+      <div class="about-card-label">
+        <span class="about-card-name" data-i18n="about.cardName1">Chef Omar</span>
+        <span class="about-card-role" data-i18n="about.cardRole1">Founder &amp; Head Chef</span>
+      </div>
+    </div>
+  </div>
+  <!-- Wide banner card -->
+  <div class="about-card-banner reveal">
+    <div class="about-card-inner">
+      <img src="ImagesWebp/7.webp" loading="lazy" decoding="async"></img>
+      <div class="about-card-glow"></div>
+      <div class="about-card-label">
+        <span class="about-card-name" data-i18n="about.cardName2">The Al-Mazag Story</span>
+        <span class="about-card-role" data-i18n="about.cardRole2">One team. One flavour.</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END OWNER PHOTO -->
+
+    <!-- About section text -->
+    <div>
+      <!-- Small label above the title -->
+      <span class="about-tag" data-i18n="about.tag">Our Story</span>
+
+      <!-- Main title — change the words here -->
+      <h2 class="about-title" data-i18n-html="about.title">Born From <em>Passion</em>,<br>Built on <em>Fire</em></h2>
+      <div class="about-div"></div>
+
+      <!-- Story paragraph 1 — write your restaurant story here -->
+      <p class="about-p" data-i18n="about.p1">Omar started Al-Mazag three years ago in Moharram Bek with a small grill, a bold recipe, and one promise: every burger should feel like more than just food.</p>
+
+      <!-- Story paragraph 2 — continue your story here -->
+      <p class="about-p" data-i18n="about.p2">Today Al-Mazag is one of Alexandria’s favorite burger spots. Omar’s young restaurant is built on fresh ingredients, warm service, and a growing local reputation.</p>
+
+      <!-- Three achievement stats — change the numbers and labels -->
+      <div class="about-stats">
+        <div><div class="astat-num">3+</div><div class="astat-lbl" data-i18n="about.st1">Years of Fire</div></div>
+        <div><div class="astat-num">50K+</div><div class="astat-lbl" data-i18n="about.st2">Customers</div></div>
+        <div><div class="astat-num">100%</div><div class="astat-lbl" data-i18n="about.st3">Fresh Daily</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END ABOUT SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  MENU SECTION                                               ║
+     ║                                                             ║
+     ║  HOW TO CHANGE A MENU ITEM IMAGE:                          ║
+     ║  Find any line that says src="https://..." inside a        ║
+     ║  <div class="m-card"> and replace it with:                 ║
+     ║    • Your file: src="burger1.jpg"                          ║
+     ║      (file must be in the same folder as this HTML file)   ║
+     ║    • Or a web URL: src="https://yourlink.com/image.jpg"    ║
+     ║                                                             ║
+     ║  HOW TO ADD MORE MENU ITEMS:                               ║
+     ║  Copy one full <div class="m-card">...</div>        ║
+     ║  block and paste it inside <div class="menu-grid">         ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  MENU SECTION - AL-MAZAG RESTAURANT                        ║
+     ║  Clean, organized menu with categories and pricing         ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="menu" class="page-sec">
+  <div class="menu-head">
+    <span class="menu-tag" data-i18n="menu.tag">Our Menu</span>
+    <h2 class="menu-title" data-i18n-html="menu.title">Al-Mazag <span>Specialties</span></h2>
+  </div>
+
+  <div class="menu-grid">
+
+    <h3 class="menu-subhead" data-i18n="menu.secBurg">Burgers &amp; sandwiches</h3>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/smash_burger_webp.webp" alt="Smash Burger" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catBurg">🍔 Signature Burgers</span>
+          <div class="m-price">115 EGP
+          <button class="btn-add-cart" onclick="chooseSandwichSize('Smash Burger')">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.d1n">Smash Burger</div>
+          <div class="m-desc" data-i18n="menu.d1d">A 100g smashed beef patty covered in cheddar sauce, Big Tasty sauce, ketchup, pickles, and caramelized onions.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/classic_burger_webp.webp" alt="Classic Burger" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catBurg">🍔 Signature Burgers</span>
+          <div class="m-price">75 EGP
+          <button class="btn-add-cart" onclick="chooseSandwichSize('Classic Burger')">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.d2n">Classic Burger</div>
+          <div class="m-desc" data-i18n="menu.d2d">A 70g beef patty covered in cheddar sauce, ketchup, Big Tasty sauce, tomatoes, pickles, lettuce, and onions.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/checken_Burger_webp.webp" alt="Chicken Burger" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catBurg">🍔 Signature Burgers</span>
+          <div class="m-price">135 EGP
+          <button class="btn-add-cart" onclick="addToCart('Chicken Burger',135)">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.d3n">Chicken Burger</div>
+          <div class="m-desc" data-i18n="menu.d3d">A whole chicken breast piece covered in cheddar sauce, ranch sauce, and ketchup, topped with pickles, tomatoes, smoked turkey, lettuce, and onions.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/elmazag_sandwich_webp.webp" alt="El-Mazag" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catBurg">🍔 Signature Burgers</span>
+          <div class="m-price">135 EGP
+          <button class="btn-add-cart" onclick="chooseSandwichSize('El-Mazag')">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.d4n">El-Mazag</div>
+          <div class="m-desc" data-i18n="menu.d4d">A 150g beef patty stuffed with cheese, topped with cheddar sauce, ketchup, pastrami, Big Tasty sauce, pickles, tomatoes, lettuce, and onions.</div>
+        </div>
+      </div>
+      <div class="m-badge" data-i18n="menu.b4">Best Seller</div>
+    </div>
+
+    <h3 class="menu-subhead" data-i18n="menu.secFries">Fries</h3>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/fries_regular_webp.webp" alt="Standard Fries" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catFries">🍟 Fries</span>
+          <div class="m-price">30 EGP
+          <button class="btn-add-cart" onclick="addToCart('Fries — Standard',30)">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.fr1n">Standard Fries</div>
+          <div class="m-desc" data-i18n="menu.fr1d">Crispy golden fries</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/fries_spicy_webp.webp" alt="Spicy Fries" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catFries">🍟 Fries</span>
+          <div class="m-price">40 EGP
+          <button class="btn-add-cart" onclick="addToCart('Fries — Spicy',40)">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.fr2n">Spicy Fries</div>
+          <div class="m-desc" data-i18n="menu.fr2d">Fries with spicy seasoning</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/fries_ransh_webp.webp" alt="Ranch Fries" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catFries">🍟 Fries</span>
+          <div class="m-price">40 EGP
+          <button class="btn-add-cart" onclick="addToCart('Fries — Ranch',40)">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.fr3n">Ranch Fries</div>
+          <div class="m-desc" data-i18n="menu.fr3d">Fries with ranch dressing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/fries-cheese_webp.webp" alt="Cheese Fries" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catFries">🍟 Fries</span>
+          <div class="m-price">45 EGP
+          <button class="btn-add-cart" onclick="addToCart('Fries — Cheese',45)">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.fr4n">Cheese Fries</div>
+          <div class="m-desc" data-i18n="menu.fr4d">Loaded with melted cheese</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="menu-subhead" data-i18n="menu.secDrink">Drinks</h3>
+
+    <div class="m-card">
+      <div class="m-img">
+        <img src="ImagesWebp/menu/COLA.webp" alt="Cola" loading="lazy" decoding="async">
+        <div class="m-overlay">
+          <span class="m-cat-label" data-i18n="menu.catSides">🥤 Drinks</span>
+          <div class="m-price">25 EGP
+          <button class="btn-add-cart" onclick="chooseColaType(25)">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
+            </button>
+        </div>
+          <div class="m-name" data-i18n="menu.d9n">Cola</div>
+          <div class="m-desc" data-i18n="menu.d9d">Choose your type: Classic, Diet, or Pink V Cola</div>
+        </div>
+      </div>
+      <div class="m-badge" data-i18n="menu.b9">Soft Drink</div>
+    </div>
+
+  </div>
+</section>
+<!-- END MENU SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  LOCATION SECTION                                           ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="location" class="page-sec" style="background:#0F0402;">
+  <div class="sec-inner">
+    <span class="sec-tag" data-i18n="loc.tag">Find Us</span>
+    <h2 class="sec-title" data-i18n-html="loc.title">Our <em>Location</em></h2>
+    <div class="sec-div"></div>
+
+    <div class="loc-grid">
+      <!-- LOCATION IMAGES — 3 photos of your restaurant -->
+      <div class="loc-imgs">
+
+        <!-- LOCATION IMAGE 1 — wide top photo (restaurant interior or outside) -->
+        <div class="li">
+          <img src="ImagesWebp/Location_section_Secound_image.webp" alt="Al-Mazag Restaurant Interior" loading="lazy" decoding="async">
+        </div>
+
+        <!-- LOCATION IMAGE 2 — bottom left square photo -->
+        <div class="li">
+          <img src="ImagesWebp/Location_section.webp" alt="Al-Mazag Dining Area" loading="lazy" decoding="async">
+        </div>
+
+        <!-- LOCATION IMAGE 3 — bottom right square photo -->
+        <div class="li">
+          <img src="ImagesWebp/Location_Section%20_third_image.webp" alt="Al-Mazag Bar Area" loading="lazy" decoding="async">
+        </div>
+
+      </div>
+      <!-- END LOCATION IMAGES -->
+
+      <!-- LOCATION INFO — address, hours, directions -->
+      <div class="loc-info">
+
+        <!-- LOCATION INFO: Address block -->
+        <div class="i-block">
+          <div class="i-icon">📍</div>
+          <div style="width:100%;">
+            <div class="i-lbl" data-i18n="loc.addr">Address</div>
+            <div class="loc-tabs">
+              <button class="loc-tab active" type="button" onclick="setLocationBranch(0)">Smouha</button>
+              <button class="loc-tab" type="button" onclick="setLocationBranch(1)">Moharam Bek</button>
+            </div>
+            <div class="loc-branch-card">
+              <div class="loc-branch-name" id="loc-branch-name">سموحة</div>
+              <div class="loc-branch-address" id="loc-branch-address">شارع مسجد حاتم</div>
+              <a class="loc-map-btn" id="loc-map-btn" href="https://maps.app.goo.gl/inMvyMWaJCcsLcHA7?g_st=ic" target="_blank" rel="noopener noreferrer">Open In Google Maps</a>
+            </div>
+            <div class="i-sub" data-i18n="loc.addrS">Choose a branch from the tabs and open directions.</div>
+          </div>
+        </div>
+
+        <!-- LOCATION INFO: Opening hours block -->
+        <div class="i-block">
+          <div class="i-icon">🕐</div>
+          <div>
+            <div class="i-lbl" data-i18n="loc.hrs">Opening Hours</div>
+            <!-- Change the days -->
+            <div class="i-val" data-i18n="loc.hrsV">Every Day</div>
+            <!-- Change the hours -->
+            <div class="i-sub" data-i18n="loc.hrsS">12:00 PM – 2:00 AM</div>
+          </div>
+        </div>
+
+        <!-- LOCATION INFO: Directions block -->
+        <div class="i-block">
+          <div class="i-icon">🚗</div>
+          <div>
+            <div class="i-lbl" data-i18n="loc.get">Getting Here</div>
+            <div class="i-val" data-i18n="loc.getV">5 Min from Ring Road</div>
+            <div class="i-sub" data-i18n="loc.getS">Uber / Careem drop-off at main gate.</div>
+          </div>
+        </div>
+
+      </div>
+      <!-- END LOCATION INFO -->
+    </div>
+  </div>
+</section>
+<!-- END LOCATION SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  HOTLINES / CONTACT SECTION                                 ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="hotlines" class="page-sec" style="background:var(--red);">
+  <div class="sec-inner">
+    <span class="sec-tag" style="color:var(--yellow);" data-i18n="hot.tag">Contact Us</span>
+    <h2 class="sec-title" data-i18n-html="hot.title">We're <em style="color:var(--yellow);">Always</em> Here</h2>
+    <div class="sec-div" style="background:var(--yellow);"></div>
+
+    <div class="ht-grid">
+
+      <!-- PHONE NUMBER 1 — Reservations -->
+      <div class="ht-card">
+        <div class="ht-icon">📞</div>
+        <div class="ht-dept" data-i18n="hot.rsv">Reservations</div>
+        <!-- PHONE NUMBER: change the number here -->
+        <div class="ht-num">17640</div>
+        <!-- Hours: change if needed -->
+        <div class="ht-hrs" data-i18n="hot.rsvH">Daily 10am – 10pm</div>
+      </div>
+
+      <!-- PHONE NUMBER 2 — Delivery -->
+      <div class="ht-card">
+        <div class="ht-icon">🚚</div>
+        <div class="ht-dept" data-i18n="hot.del">Delivery Orders</div>
+        <!-- PHONE NUMBER: change the number here -->
+        <div class="ht-num">+20 1010157407</div>
+        <div class="ht-hrs" data-i18n="hot.delH">Daily 11am – 2am</div>
+      </div>
+
+
+      <!-- PHONE NUMBER 4 — WhatsApp -->
+      <div class="ht-card">
+        <div class="ht-icon">💬</div>
+        <div class="ht-dept" data-i18n="hot.wa">WhatsApp</div>
+        <!-- PHONE NUMBER: change the number here -->
+        <div class="ht-num">+20 1010157407</div>
+        <div class="ht-hrs" data-i18n="hot.waH">24 / 7 Available</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- END HOTLINES SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  DELIVERY SECTION                                           ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="delivery" class="page-sec" style="background:#0F0402;">
+  <div class="sec-inner">
+    <div class="del-grid">
+
+      <!-- Left side: text content -->
+      <div>
+        <span class="sec-tag" data-i18n="del.tag">Home Delivery</span>
+        <!-- Change the title -->
+        <h2 class="sec-title" data-i18n-html="del.title">Al-Mazag at<br>Your <em>Doorstep</em></h2>
+        <div class="sec-div"></div>
+        <!-- Change the description -->
+        <p class="sec-p" data-i18n="del.p">Fresh, hot, and packed with care — we bring the full Al-Mazag experience right to you.</p>
+
+        <!-- Three feature bullets — change text as needed -->
+        <div class="del-feats">
+          <div class="del-feat">
+            <div class="del-feat-ic">⚡</div>
+            <div>
+              <div class="del-feat-t" data-i18n="del.f1t">30 Minutes or Less</div>
+              <div class="del-feat-s" data-i18n="del.f1s">Our thermal packaging keeps every bite fresh and hot.</div>
+            </div>
+          </div>
+          <div class="del-feat">
+            <div class="del-feat-ic">🗺️</div>
+            <div>
+              <div class="del-feat-t" data-i18n="del.f2t">Live Order Tracking</div>
+              <div class="del-feat-s" data-i18n="del.f2s">Follow your order from kitchen to door in real time.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="del-cta">
+          <a href="#order" class="btn-fire" data-i18n="del.btn1">Order Now</a>
+          <a href="#menu"  class="btn-ghost" data-i18n="del.btn2">View Menu</a>
+        </div>
+      </div>
+
+      <!-- Right side: delivery photo -->
+      <div class="del-vis reveal">
+        <div class="del-img">
+          <!-- DELIVERY IMAGE — replace src with your photo -->
+          <img src="ImagesWebp/5.webp" loading="lazy" decoding="async"
+               alt="Al-Mazag Delivery">
+        </div>
+        <!-- Badge showing delivery time — change the number if needed -->
+        <div class="del-badge">
+          <div class="del-badge-num">30'</div>
+          <div class="del-badge-t" data-i18n="del.bd">Avg Delivery</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- END DELIVERY SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  ORDER / RESERVATION SECTION                                ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="order">
+  <div class="ord-inner">
+    <span class="sec-tag" data-i18n="ord.tag">Place Your Order</span>
+    <!-- Change the title -->
+    <h2 class="sec-title" style="font-size:clamp(3rem,7vw,5.5rem);" data-i18n-html="ord.title">Order <em>Fresh</em>,<br>Eat Happy</h2>
+    <div class="sec-div" style="background:var(--yellow);margin:16px auto 22px;"></div>
+    <!-- Change the description -->
+    <p class="sec-p" data-i18n="ord.p">Leave your number and we'll call back in minutes to confirm.</p>
+    <p class="ord-delivery-note" data-i18n="ord.deliveryNote">This total covers food only — delivery is not included. Customer service will confirm the delivery fee and whether your area is covered.</p>
+    <div class="ord-form">
+      <input id="quick-order-phone" type="tel" data-i18n-placeholder="ord.ph" placeholder="Your phone number...">
+      <button id="quick-order-btn" type="button" data-i18n="ord.btn">Order Now</button>
+    </div>
+  </div>
+</section>
+<!-- END ORDER SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  FOOTER                                                     ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<footer>
+
+  <!-- Footer brand — RESTAURANT NAME in footer -->
+  <div>
+    <!-- Change "Al" and "-Mazag" below -->
+    <span class="ft-logo">Al<span>-Mazag</span></span>
+    <!-- Change the short description -->
+    <p class="ft-p" data-i18n="ft.p">Bold flavors, real passion, freshly grilled every day. Al-Mazag is where great food meets great people.</p>
+  </div>
+
+  <!-- Footer navigation links -->
+  <div class="ft-col">
+    <div class="ft-h" data-i18n="ft.nav">Navigate</div>
+    <ul>
+      <li><a href="#about" data-i18n="nav.story">Our Story</a></li>
+      <li><a href="#menu" data-i18n="nav.menu">Menu</a></li>
+      <li><a href="#location" data-i18n="nav.location">Location</a></li>
+      <li><a href="#hotlines" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Footer services links -->
+  <div class="ft-col">
+    <div class="ft-h" data-i18n="ft.svc">Services</div>
+    <ul>
+      <li><a href="#delivery" data-i18n="ft.hd">Home Delivery</a></li>
+      <li><a href="#order" data-i18n="nav.order">Order Now</a></li>
+      <li><a href="#" data-i18n="ft.pn">Private Events</a></li>
+      <li><a href="#" data-i18n="ft.cat">Catering</a></li>
+    </ul>
+  </div>
+
+  <!-- SOCIAL LINKS — replace # with your actual social media links -->
+  <div class="ft-col">
+    <div class="ft-h" data-i18n="ft.fol">Follow Us</div>
+    <ul>
+      <!-- SOCIAL LINK: Instagram — replace # with your Instagram URL -->
+      <li><a href="https://www.instagram.com/el_mazag_/" target="_blank" rel="noopener noreferrer" data-i18n="ft.ig">Instagram</a></li>
+      <!-- SOCIAL LINK: TikTok — replace # with your TikTok URL -->
+      <li><a href="https://www.tiktok.com/@elghazaly40?_r=1&_t=ZS-95VO5zZgeOb" target="_blank" rel="noopener noreferrer" data-i18n="ft.tt">TikTok</a></li>
+      <!-- SOCIAL LINK: Facebook — replace # with your Facebook URL -->
+      <li><a href="https://www.facebook.com/people/%25D8%25A8%25D8%25B1%25D8%25AC%25D8%25B1-%25D8%25A7%25D9%2584%25D9%2585%25D8%25B2%25D8%25A7%25D8%25AC/61554956193775/?sk=photos" target="_blank" rel="noopener noreferrer" data-i18n="ft.fb">Facebook</a></li>
+      <!-- SOCIAL LINK: Google Maps — replace # with your Google Maps URL -->
+      <li><a href="#" data-i18n="ft.gm">Google Maps</a></li>
+    </ul>
+  </div>
+
+</footer>
+
+<!-- Footer bottom bar — change the year and name -->
+<div class="ft-bot">
+  <p data-i18n="ft.cr">© 2024 Al-Mazag Restaurant · All rights reserved.</p>
+  <p data-i18n="ft.mk">Made with 🔥 in Egypt</p>
+</div>
+<!-- END FOOTER -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  JAVASCRIPT — Animations & Interactions                     ║
+     ║  Most things here you should NOT change.                    ║
+     ║  The parts you CAN change are clearly marked below.         ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+
+
+<!-- ═══ FLOATING CART BUTTON ═══ -->
+<button id="cart-btn" onclick="toggleCart()" aria-label="View Cart">
+  <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg>
+  <span id="cart-count">0</span>
+</button>
+
+<!-- ═══ CART DRAWER ═══ -->
+<div id="cart-drawer">
+  <div class="cart-header">
+    <h3 data-i18n="cart.title">🛒 Your Order</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items-list">
+    <div class="cart-empty" id="cart-empty-msg" data-i18n-html="cart.empty">Your cart is empty.<br>Add some fire! 🔥</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span class="cart-total-lbl" data-i18n="cart.total">Total</span>
+      <span class="cart-total-val"><span id="cart-total">0</span> EGP</span>
+    </div>
+    <p class="cart-delivery-note" data-i18n="cart.deliveryNote">Food total only — delivery fee is not included. Our customer service will confirm delivery cost and coverage with you.</p>
+    <button class="cart-checkout" onclick="checkout()" data-i18n="cart.go">Place Order →</button>
+  </div>
+</div>
+
+<!-- How to complete order: phone or WhatsApp + copy-ready message -->
+<div id="order-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+  <div class="order-modal">
+    <button type="button" class="order-modal-close" onclick="cancelOrderModal()" aria-label="Close">×</button>
+
+    <div id="order-modal-step1" class="order-modal-step active">
+      <span class="order-modal-tag" data-i18n="om.s1tag">Almost there</span>
+      <h3 id="order-modal-title" data-i18n="om.s1title">Complete your order</h3>
+      <p class="order-modal-lead" data-i18n="om.s1lead">Pick how you’d like to reach us — we’ll guide you with your cart ready to go.</p>
+      <p class="order-modal-delivery-note" data-i18n="om.deliveryNote">Delivery is billed separately — please arrange fees and zone details with customer service.</p>
+      <div class="order-choice-grid">
+        <button type="button" class="order-choice-card" onclick="orderChooseCall()">
+          <span class="oc-ic" aria-hidden="true">📞</span>
+          <span class="oc-t" data-i18n="om.callT">Call us</span>
+          <span class="oc-s" data-i18n="om.callS">Talk to customer service now</span>
+        </button>
+        <button type="button" class="order-choice-card oc-wa" onclick="orderChooseWhatsApp()">
+          <span class="oc-ic" aria-hidden="true">💬</span>
+          <span class="oc-t" data-i18n="om.waT">WhatsApp</span>
+          <span class="oc-s" data-i18n="om.waS">Send your order in one tap</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="order-modal-step2" class="order-modal-step">
+      <button type="button" class="order-wa-back" onclick="orderWhatsAppBack()">← Back</button>
+      <span class="order-modal-tag" data-i18n="om.s2st">WhatsApp</span>
+      <h3 data-i18n="om.s2title">Your order message</h3>
+      <p class="order-modal-lead" data-i18n="om.s2lead">Fill in your details at the top (Arabic section). Your cart summary is added below — keep that part when you send.</p>
+      <div class="order-wa-phone-wrap">
+        <div class="lbl" data-i18n="om.waLbl">WhatsApp number</div>
+        <div class="num" id="order-wa-display-num">+20 1010 157 407</div>
+      </div>
+      <p class="order-wa-tip" data-i18n-html="om.s2tip">أكمل بياناتك بعد كل سطر في الأعلى، ثم انسخ أو افتح واتساب.<br>Tip: <strong style="color:rgba(255,255,255,.65);">Copy message</strong> or <strong style="color:rgba(255,255,255,.65);">Open WhatsApp</strong>.</p>
+      <label for="order-wa-message" class="order-modal-tag" style="margin-bottom:8px;" data-i18n="om.msgLbl">الرسالة — Message</label>
+      <textarea id="order-wa-message" rows="18" spellcheck="false"></textarea>
+      <div class="order-wa-actions">
+        <button type="button" class="order-btn-copy" id="order-btn-copy" onclick="copyOrderMessage()" data-i18n="om.copy">Copy message</button>
+        <button type="button" class="order-btn-wa" onclick="openWhatsAppWithOrder()" data-i18n="om.openWa">Open WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="size-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="size-modal-title">
+  <div class="size-modal">
+    <div class="size-modal-head">
+      <div>
+        <div class="size-modal-title" id="size-modal-title">Choose Sandwich Size</div>
+        <div class="size-modal-sub" id="size-modal-sub">Pick your preferred size before adding to cart.</div>
+      </div>
+      <button class="size-modal-close" type="button" onclick="closeSizeModal()" aria-label="Close">×</button>
+    </div>
+    <div class="size-options" id="size-options"></div>
+  </div>
+</div>
+
+<script src="mazag-lang.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
