@@ -114,18 +114,18 @@ setTimeout(() => {
   for(let i = 0; i < 12; i++) setTimeout(createSpark, i * 120);
 })();
 
-if(!perfLite){
-gsap.timeline({ delay: .5 })
+if(!perfLite && hasGSAP){
+window.gsap.timeline({ delay: .5 })
   .from('.hero-corner-tl', { width:0, height:0, duration:.6, ease:'power3.out' })
   .from('.hero-corner-tr', { width:0, height:0, duration:.6, ease:'power3.out' }, '-=.4')
   .from('.hero-corner-bl', { width:0, height:0, duration:.6, ease:'power3.out' }, '-=.4')
   .from('.hero-corner-br', { width:0, height:0, duration:.6, ease:'power3.out' }, '-=.4');
 
-  gsap.from('.hero-halo',  { scale:.3, opacity:0, duration:2, ease:'power3.out', delay:.8 });
-  gsap.from('.hero-halo2', { scale:.2, opacity:0, duration:2.4, ease:'power3.out', delay:1 });
-  gsap.from('.hero-glow-ring', { scale:.4, opacity:0, duration:1.8, ease:'power3.out', delay:.6 });
-  gsap.from('.hero-bottom-line', { scaleX:0, opacity:0, duration:1.5, ease:'power3.out', delay:1.4 });
-  gsap.to('.hero-chef-img', {
+  window.gsap.from('.hero-halo',  { scale:.3, opacity:0, duration:2, ease:'power3.out', delay:.8 });
+  window.gsap.from('.hero-halo2', { scale:.2, opacity:0, duration:2.4, ease:'power3.out', delay:1 });
+  window.gsap.from('.hero-glow-ring', { scale:.4, opacity:0, duration:1.8, ease:'power3.out', delay:.6 });
+  window.gsap.from('.hero-bottom-line', { scaleX:0, opacity:0, duration:1.5, ease:'power3.out', delay:1.4 });
+  window.gsap.to('.hero-chef-img', {
     scale: 1.015,
     duration: 5,
     ease: 'sine.inOut',
@@ -134,7 +134,7 @@ gsap.timeline({ delay: .5 })
     delay: 2
   });
 
-  gsap.to('.hero-atm', {
+  window.gsap.to('.hero-atm', {
     opacity: .7,
     duration: 4,
     ease: 'sine.inOut',
@@ -142,7 +142,7 @@ gsap.timeline({ delay: .5 })
     yoyo: true
   });
 
-  gsap.to('.hero-scanlines', {
+  window.gsap.to('.hero-scanlines', {
     backgroundPositionY: '100px',
     duration: 8,
     ease: 'none',
@@ -150,7 +150,7 @@ gsap.timeline({ delay: .5 })
   });
 
   setTimeout(() => {
-    gsap.to('.hero-stat-num', {
+    window.gsap.to('.hero-stat-num', {
       textShadow: '0 0 20px rgba(232,93,4,.9)',
       duration: 2,
       ease: 'sine.inOut',
@@ -162,16 +162,16 @@ gsap.timeline({ delay: .5 })
 }
 
 setTimeout(() => {
-  if(perfLite||!heroEl) return;
+  if(perfLite || !heroEl || !hasGSAP) return;
   heroEl.addEventListener('mouseenter', () => {
-    gsap.to('.burger-bg svg', {
+    window.gsap.to('.burger-bg svg', {
       opacity: (i, el) => parseFloat(el.style.opacity) * 2.5,
       duration: .8,
       stagger:.05
     });
   });
   heroEl.addEventListener('mouseleave', () => {
-    gsap.to('.burger-bg svg', {
+    window.gsap.to('.burger-bg svg', {
       opacity: (i, el) => parseFloat(el.style.opacity) / 2.5,
       duration: .8,
       stagger:.05
