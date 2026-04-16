@@ -560,7 +560,10 @@ function changeQty(idx,delta){
 }
 
 function toggleCart(){
-  document.getElementById('cart-drawer').classList.toggle('open');
+  var drawer = document.getElementById('cart-drawer');
+  if(!drawer) return;
+  drawer.classList.toggle('open');
+  document.body.classList.toggle('cart-open', drawer.classList.contains('open'));
 }
 
 function getOrderDetailValues(){
