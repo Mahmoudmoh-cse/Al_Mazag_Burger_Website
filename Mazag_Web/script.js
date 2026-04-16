@@ -382,6 +382,10 @@ var SANDWICH_SIZE_PRICES = {
     ['Single', 135],
     ['Double', 195],
     ['Triple', 250]
+  ],
+  'Chicken Burger': [
+    ['Single', 135],
+    ['Double', 185]
   ]
 };
 var branches = [
@@ -530,19 +534,51 @@ function toggleCart(){
   document.getElementById('cart-drawer').classList.toggle('open');
 }
 
-function buildOrderMessageText(items){
+function getOrderDetailValues(){
+  function value(id){
+    var el = document.getElementById(id);
+    return el ? String(el.value || '').trim() : '';
+  }
+  return {
+    area: value('order-detail-area'),
+    name: value('order-detail-name'),
+    phone1: value('order-detail-phone1'),
+    phone2: value('order-detail-phone2'),
+    street: value('order-detail-street'),
+    building: value('order-detail-building'),
+    landmark: value('order-detail-landmark')
+  };
+}
+
+function resetOrderDetailFields(){
+  [
+    'order-detail-area',
+    'order-detail-name',
+    'order-detail-phone1',
+    'order-detail-phone2',
+    'order-detail-street',
+    'order-detail-building',
+    'order-detail-landmark'
+  ].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el)el.value = '';
+  });
+}
+
+function buildOrderMessageText(items, details){
+  details = details || getOrderDetailValues();
   var arPart = [
     'برجاء ارسال البيانات كامله لتأكيد الاوردر سريعآ',
     '',
     'لطلب أوردر :',
     '',
-    'المنطقة : 🗺️',
-    'الإسم : 🪪',
-    'رقم تليفون  : 📱',
-    'رقم تليفون إضافى ( أو أرضى ) : ☎️',
-    'الشارع الرئيسيى و المتفرع منه : 📍',
-    'رقم العمارة و الدور و الشقة : 🏠',
-    'علامة مميزة بالقرب من المنزل :📍',
+    'المنطقة : 🗺️ ' + details.area,
+    'الإسم : 🪪 ' + details.name,
+    'رقم تليفون  : 📱 ' + details.phone1,
+    'رقم تليفون إضافى ( أو أرضى ) : ☎️ ' + details.phone2,
+    'الشارع الرئيسيى و المتفرع منه : 📍 ' + details.street,
+    'رقم العمارة و الدور و الشقة : 🏠 ' + details.building,
+    'علامة مميزة بالقرب من المنزل :📍 ' + details.landmark,
     'الأوردر كاملا : 🍽️',
     '',
     '──────────',
@@ -571,6 +607,13 @@ function buildOrderMessageText(items){
   var orderPart = orderLines.join('\n');
 
   return { text: arPart + orderPart, total: total };
+}
+
+function refreshOrderMessagePreview(){
+  if(!pendingOrderSnapshot||pendingOrderSnapshot.length===0)return;
+  var ta = document.getElementById('order-wa-message');
+  if(!ta)return;
+  ta.value = buildOrderMessageText(pendingOrderSnapshot, getOrderDetailValues()).text;
 }
 
 function checkout(){
@@ -605,6 +648,9 @@ function cancelOrderModal(){
     copyBtn.classList.remove('copied');
     copyBtn.textContent = typeof getMazagT === 'function' ? getMazagT('om.copy') : 'Copy message';
   }
+  resetOrderDetailFields();
+  var ta = document.getElementById('order-wa-message');
+  if(ta)ta.value = '';
   pendingOrderSnapshot = null;
 }
 
@@ -622,7 +668,7 @@ function orderChooseCall(){
 
 function orderChooseWhatsApp(){
   if(!pendingOrderSnapshot||pendingOrderSnapshot.length===0)return;
-  var built = buildOrderMessageText(pendingOrderSnapshot);
+  var built = buildOrderMessageText(pendingOrderSnapshot, getOrderDetailValues());
   var ta = document.getElementById('order-wa-message');
   if(ta){ ta.value = built.text; }
   var copyBtn = document.getElementById('order-btn-copy');
@@ -665,7 +711,12 @@ function copyOrderMessage(){
 function openWhatsAppWithOrder(){
   var ta = document.getElementById('order-wa-message');
   if(!ta||!pendingOrderSnapshot)return;
-  var text = encodeURIComponent(ta.value || buildOrderMessageText(pendingOrderSnapshot).text);
+  var details = getOrderDetailValues();
+  if(!details.area || !details.name || !details.phone1 || !details.street || !details.building){
+    alert(typeof getMazagT === 'function' ? getMazagT('om.fillRequired') : 'Please complete the required delivery details before sending.');
+    return;
+  }
+  var text = encodeURIComponent(ta.value || buildOrderMessageText(pendingOrderSnapshot, details).text);
   window.open('https://wa.me/' + ORDER_WHATSAPP_DIGITS + '?text=' + text, '_blank', 'noopener,noreferrer');
   finishOrderSuccess();
 }
@@ -717,6 +768,20 @@ if(quickOrderPhone){
     }
   });
 }
+[
+  'order-detail-area',
+  'order-detail-name',
+  'order-detail-phone1',
+  'order-detail-phone2',
+  'order-detail-street',
+  'order-detail-building',
+  'order-detail-landmark'
+].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el){
+    el.addEventListener('input', refreshOrderMessagePreview);
+  }
+});
 
 document.addEventListener('click',function(e){
   var drawer=document.getElementById('cart-drawer');
