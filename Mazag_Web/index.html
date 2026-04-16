@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -295,7 +295,7 @@
         <div class="m-overlay">
           <span class="m-cat-label" data-i18n="menu.catBurg">🍔 Signature Burgers</span>
           <div class="m-price">135 EGP
-          <button class="btn-add-cart" onclick="addToCart('Chicken Burger',135)">
+          <button class="btn-add-cart" onclick="chooseSandwichSize('Chicken Burger')">
               <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM16 10a4 4 0 01-8 0"/></svg><span data-i18n="menu.add">Add to Cart</span>
             </button>
         </div>
@@ -406,6 +406,124 @@
       </div>
       <div class="m-badge" data-i18n="menu.b9">Soft Drink</div>
     </div>
+
+    <h3 class="menu-subhead" data-i18n="menu.exSecSauces">🫙 Sauces &amp; Toppings</h3>
+    <div class="extras-list">
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_katchb">Katchb</div>
+        <div class="extras-meta">
+          <div class="extras-price">10 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Katchb',10)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_big_testy">Big Testy</div>
+        <div class="extras-meta">
+          <div class="extras-price">20 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Big Testy',20)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_spaicy">Spaicy</div>
+        <div class="extras-meta">
+          <div class="extras-price">20 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Spaicy',20)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_ranch">Ranch</div>
+        <div class="extras-meta">
+          <div class="extras-price">20 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Ranch',20)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_chesse">Chesse</div>
+        <div class="extras-meta">
+          <div class="extras-price">20 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Chesse',20)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_pastrami">Pastrami</div>
+        <div class="extras-meta">
+          <div class="extras-price">30 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Pastrami',30)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_mashroum">Mashroum</div>
+        <div class="extras-meta">
+          <div class="extras-price">30 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Mashroum',30)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_beef_beacon">Beef Beacon</div>
+        <div class="extras-meta">
+          <div class="extras-price">30 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Beef Beacon',30)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_smoky_beef">Smoky Beef</div>
+        <div class="extras-meta">
+          <div class="extras-price">70 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Smoky Beef',70)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="menu-subhead" data-i18n="menu.exSecProtein">🥩 Protein &amp; Fillings</h3>
+    <div class="extras-list">
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_classic_piece_beef">Classic piece Beef</div>
+        <div class="extras-meta">
+          <div class="extras-price">30 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Classic piece Beef',30)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_a_piece_of_mazzag">A piece Of Mazzag</div>
+        <div class="extras-meta">
+          <div class="extras-price">60 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('A piece Of Mazzag',60)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_piece_chicken">Piece Chicken</div>
+        <div class="extras-meta">
+          <div class="extras-price">50 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Piece Chicken',50)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="menu-subhead" data-i18n="menu.exSecSides">🍦 Sides &amp; Extras</h3>
+    <div class="extras-list">
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_combo">Combo</div>
+        <div class="extras-meta">
+          <div class="extras-price">50 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Combo',50)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_bun">Bun</div>
+        <div class="extras-meta">
+          <div class="extras-price">15 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('Bun',15)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+      <div class="extras-item">
+        <div class="extras-name" data-i18n="menu.ex_ice_cream">ICE CREAM</div>
+        <div class="extras-meta">
+          <div class="extras-price">20 EGP</div>
+          <button class="extras-add-btn" onclick="addToCart('ICE CREAM',20)"><span data-i18n="menu.ex_add">Add</span></button>
+        </div>
+      </div>
+    </div>
+    
 
   </div>
 </section>
@@ -520,7 +638,7 @@
         <div class="ht-icon">🚚</div>
         <div class="ht-dept" data-i18n="hot.del">Delivery Orders</div>
         <!-- PHONE NUMBER: change the number here -->
-        <div class="ht-num">+20 1010157407</div>
+        <div class="ht-num">17640</div>
         <div class="ht-hrs" data-i18n="hot.delH">Daily 11am – 2am</div>
       </div>
 
@@ -561,7 +679,7 @@
           <div class="del-feat">
             <div class="del-feat-ic">⚡</div>
             <div>
-              <div class="del-feat-t" data-i18n="del.f1t">30 Minutes or Less</div>
+              <div class="del-feat-t" data-i18n="del.f1t">45 Minutes or Less</div>
               <div class="del-feat-s" data-i18n="del.f1s">Our thermal packaging keeps every bite fresh and hot.</div>
             </div>
           </div>
@@ -589,7 +707,7 @@
         </div>
         <!-- Badge showing delivery time — change the number if needed -->
         <div class="del-badge">
-          <div class="del-badge-num">30'</div>
+          <div class="del-badge-num">45'</div>
           <div class="del-badge-t" data-i18n="del.bd">Avg Delivery</div>
         </div>
       </div>
@@ -747,6 +865,38 @@
         <div class="num" id="order-wa-display-num">+20 1010 157 407</div>
       </div>
       <p class="order-wa-tip" data-i18n-html="om.s2tip">أكمل بياناتك بعد كل سطر في الأعلى، ثم انسخ أو افتح واتساب.<br>Tip: <strong style="color:rgba(255,255,255,.65);">Copy message</strong> or <strong style="color:rgba(255,255,255,.65);">Open WhatsApp</strong>.</p>
+      <div class="order-details-card">
+        <div class="order-details-grid">
+          <label class="order-field">
+            <span data-i18n="om.fArea">المنطقة</span>
+            <input id="order-detail-area" type="text" data-i18n-placeholder="om.phArea" placeholder="مثال: سموحة">
+          </label>
+          <label class="order-field">
+            <span data-i18n="om.fName">الإسم</span>
+            <input id="order-detail-name" type="text" data-i18n-placeholder="om.phName" placeholder="اسم العميل">
+          </label>
+          <label class="order-field">
+            <span data-i18n="om.fPhone1">رقم تليفون</span>
+            <input id="order-detail-phone1" type="tel" data-i18n-placeholder="om.phPhone1" placeholder="رقم الموبايل الأساسي">
+          </label>
+          <label class="order-field">
+            <span data-i18n="om.fPhone2">رقم إضافي / أرضي</span>
+            <input id="order-detail-phone2" type="tel" data-i18n-placeholder="om.phPhone2" placeholder="رقم إضافي اختياري">
+          </label>
+          <label class="order-field order-field-full">
+            <span data-i18n="om.fStreet">الشارع الرئيسي والمتفرع منه</span>
+            <input id="order-detail-street" type="text" data-i18n-placeholder="om.phStreet" placeholder="اسم الشارع الرئيسي والمتفرع">
+          </label>
+          <label class="order-field">
+            <span data-i18n="om.fBuilding">رقم العمارة / الدور / الشقة</span>
+            <input id="order-detail-building" type="text" data-i18n-placeholder="om.phBuilding" placeholder="مثال: عمارة 12، الدور 3، شقة 7">
+          </label>
+          <label class="order-field">
+            <span data-i18n="om.fLandmark">علامة مميزة</span>
+            <input id="order-detail-landmark" type="text" data-i18n-placeholder="om.phLandmark" placeholder="مثال: بجوار مسجد / مدرسة">
+          </label>
+        </div>
+      </div>
       <label for="order-wa-message" class="order-modal-tag" style="margin-bottom:8px;" data-i18n="om.msgLbl">الرسالة — Message</label>
       <textarea id="order-wa-message" rows="18" spellcheck="false"></textarea>
       <div class="order-wa-actions">
