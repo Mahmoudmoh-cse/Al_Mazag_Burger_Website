@@ -5,6 +5,16 @@
   document.documentElement.classList.toggle('perf-lite', narrow||reduce||save);
 })();
 
+// Never let a runtime error "break" the site on mobile.
+// If something throws, degrade to perf-lite (no heavy effects) and keep UI working.
+(function(){
+  function degrade(){
+    try{ document.documentElement.classList.add('perf-lite'); }catch(e){}
+  }
+  window.addEventListener('error', function(){ degrade(); }, true);
+  window.addEventListener('unhandledrejection', function(){ degrade(); }, true);
+})();
+
 try{
   var __mz=document.documentElement;
   var __L=localStorage.getItem('mazag_lang');

@@ -503,6 +503,14 @@
   w.setMazagLang = setMazagLang;
   w.applyMazagI18n = applyMazagI18n;
   w.MAZAG_LANG = MAZAG_LANG;
+  w.mazagSetLangSafe = function (lang) {
+    try {
+      if (typeof w.setMazagLang === 'function') w.setMazagLang(lang);
+    } catch (e) {
+      // If anything goes wrong, keep the site usable.
+      try { document.documentElement.classList.add('perf-lite'); } catch (e2) {}
+    }
+  };
 
   document.addEventListener('DOMContentLoaded', function () {
     try {
