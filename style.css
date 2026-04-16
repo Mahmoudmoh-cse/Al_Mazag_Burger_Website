@@ -1059,7 +1059,7 @@ html[dir="rtl"] #cart-drawer{
   transition:left .4s cubic-bezier(.4,0,.2,1);
   box-shadow:20px 0 60px rgba(0,0,0,.5);
 }
-html[dir="rtl"] #cart-drawer.open{left:0;}
+html[dir="rtl"] #cart-drawer.open{left:0;right:auto;}
 .cart-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:24px 24px 20px;
