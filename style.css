@@ -1137,8 +1137,7 @@ html[dir="rtl"] #cart-drawer.open{left:0;right:auto;}
   body.cart-open{overflow:hidden;}
 }
 @media(max-width:480px){
-  #cart-drawer{width:100%;right:-100%;}
-  html[dir="rtl"] #cart-drawer{right:auto;left:-100%;}
+  /* Cart drawer sizing/position handled by the <=900px rule above (prevents RTL conflicts) */
   #cart-btn{bottom:24px;right:24px;}
   html[dir="rtl"] #cart-btn{
     right:auto;
