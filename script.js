@@ -879,30 +879,67 @@ if(stars.length > 0) {
   });
 }
 
+// PASTE YOUR GOOGLE SCRIPT WEB APP URL HERE:
+var GOOGLE_SHEETS_WEB_APP_URL = '';
+
 function submitRating() {
   if(currentRating === 0) {
     alert(typeof getMazagT === 'function' ? getMazagT('rate.placeholder') || 'Please select a rating first!' : 'Please select a rating first!');
     return;
   }
   
+  var btn = document.getElementById('submit-rating-btn');
+  if(btn) {
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    btn.innerText = '...';
+  }
+
   var feedback = document.getElementById('rating-feedback');
+  var feedbackText = feedback ? feedback.value : '';
+  
   var ratingData = {
     rating: currentRating,
-    feedback: feedback ? feedback.value : '',
+    feedback: feedbackText,
     date: new Date().toISOString()
   };
   
+  // Always save to localStorage as a backup
   try {
     var existingRatings = JSON.parse(localStorage.getItem('mazag_ratings') || '[]');
     existingRatings.push(ratingData);
     localStorage.setItem('mazag_ratings', JSON.stringify(existingRatings));
   } catch(e) {
-    console.error('Error saving rating', e);
+    console.error('Error saving rating locally', e);
+  }
+
+  function showSuccess() {
+    var formContainer = document.getElementById('rating-form-container');
+    var successMsg = document.getElementById('rating-success-message');
+    if(formContainer) formContainer.style.display = 'none';
+    if(successMsg) successMsg.style.display = 'block';
   }
   
-  var formContainer = document.getElementById('rating-form-container');
-  var successMsg = document.getElementById('rating-success-message');
-  
-  if(formContainer) formContainer.style.display = 'none';
-  if(successMsg) successMsg.style.display = 'block';
+  // If no URL is provided, just show success (local backup only)
+  if(!GOOGLE_SHEETS_WEB_APP_URL || GOOGLE_SHEETS_WEB_APP_URL.trim() === '') {
+    showSuccess();
+    return;
+  }
+
+  // Send data to Google Sheets
+  var formData = new FormData();
+  formData.append('rating', currentRating);
+  formData.append('feedback', feedbackText);
+
+  fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+    method: 'POST',
+    mode: 'no-cors', // no-cors is required for Google Apps Script to avoid CORS errors on client-side
+    body: formData
+  }).then(function() {
+    showSuccess();
+  }).catch(function(error) {
+    console.error('Error sending to Google Sheets!', error);
+    // Even if it fails, we show success because it's saved locally
+    showSuccess();
+  });
 }
