@@ -25,7 +25,7 @@
   --white:#FFFFFF;
 }
 html{scroll-behavior:smooth;overflow-x:hidden;}
-body{font-family:'Montserrat',sans-serif;background:var(--darker);color:var(--white);cursor:none;}
+body{font-family:'Montserrat',sans-serif;background:var(--darker);color:var(--white);cursor:none;overflow-x:hidden;width:100%;position:relative;}
 @media (hover:none){
   body{cursor:auto;}
   #cur,#cur-r{display:none!important;}

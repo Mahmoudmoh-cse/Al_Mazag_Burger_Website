@@ -432,6 +432,7 @@ function addToCart(name, price){
   else{ cart.push({name:name,price:p,qty:1}); }
   renderCart();
   document.getElementById('cart-drawer').classList.add('open');
+  document.body.classList.add('cart-open');
 }
 
 function setLocationBranch(index){
