@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Al-Mazag bilingual UI (EN / AR). Loaded by Al-Mazag_website_Semifinal.html
  */
 (function (w) {
@@ -221,6 +221,15 @@
         instapayS: 'Instant bank transfer via InstaPay app.',
         cash: 'Cash',
         cashS: 'Cash on delivery or at the branch.'
+      },
+      rate: {
+        tag: 'Your Feedback',
+        title: 'Rate Your <em>Experience</em>',
+        p: 'We would love to hear your thoughts. Let us know how we did!',
+        placeholder: 'Tell us about your experience...',
+        submit: 'Submit Feedback',
+        successTitle: 'Thank You! 🎉',
+        successMsg: 'Your feedback has been received. We appreciate your support.'
       }
     },
     ar: {
@@ -441,6 +450,15 @@
         instapayS: 'تحويل بنكي فوري عبر تطبيق إنستا باي.',
         cash: 'كاش',
         cashS: 'دفع نقدي عند الاستلام أو داخل الفرع.'
+      },
+      rate: {
+        tag: 'رأيك يهمنا',
+        title: 'قيّم <em>تجربتك</em>',
+        p: 'يسعدنا سماع رأيك. شاركنا تجربتك معنا!',
+        placeholder: 'أخبرنا عن تجربتك...',
+        submit: 'إرسال التقييم',
+        successTitle: 'شكراً لك! 🎉',
+        successMsg: 'تم استلام تقييمك. نحن نقدر دعمك.'
       }
     }
   };

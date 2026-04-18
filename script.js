@@ -841,3 +841,67 @@ document.addEventListener('keydown',function(e){
 });
 
 setLocationBranch(0);
+
+// RATING LOGIC
+var currentRating = 0;
+var stars = document.querySelectorAll('.star-rating .star');
+
+if(stars.length > 0) {
+  stars.forEach(function(star) {
+    star.addEventListener('mouseover', function() {
+      var val = parseInt(this.getAttribute('data-value'));
+      stars.forEach(function(s) {
+        if(parseInt(s.getAttribute('data-value')) <= val) {
+          s.classList.add('hovered');
+        } else {
+          s.classList.remove('hovered');
+        }
+      });
+    });
+
+    star.addEventListener('mouseout', function() {
+      stars.forEach(function(s) {
+        s.classList.remove('hovered');
+      });
+    });
+
+    star.addEventListener('click', function() {
+      currentRating = parseInt(this.getAttribute('data-value'));
+      stars.forEach(function(s) {
+        if(parseInt(s.getAttribute('data-value')) <= currentRating) {
+          s.classList.add('selected');
+        } else {
+          s.classList.remove('selected');
+        }
+      });
+    });
+  });
+}
+
+function submitRating() {
+  if(currentRating === 0) {
+    alert(typeof getMazagT === 'function' ? getMazagT('rate.placeholder') || 'Please select a rating first!' : 'Please select a rating first!');
+    return;
+  }
+  
+  var feedback = document.getElementById('rating-feedback');
+  var ratingData = {
+    rating: currentRating,
+    feedback: feedback ? feedback.value : '',
+    date: new Date().toISOString()
+  };
+  
+  try {
+    var existingRatings = JSON.parse(localStorage.getItem('mazag_ratings') || '[]');
+    existingRatings.push(ratingData);
+    localStorage.setItem('mazag_ratings', JSON.stringify(existingRatings));
+  } catch(e) {
+    console.error('Error saving rating', e);
+  }
+  
+  var formContainer = document.getElementById('rating-form-container');
+  var successMsg = document.getElementById('rating-success-message');
+  
+  if(formContainer) formContainer.style.display = 'none';
+  if(successMsg) successMsg.style.display = 'block';
+}

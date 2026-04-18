@@ -761,6 +761,37 @@
 
 
 <!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  RATING & FEEDBACK SECTION                                  ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section id="rating" class="page-sec" style="background:#0F0402;">
+  <div class="sec-inner" style="text-align:center; max-width:600px;">
+    <span class="sec-tag" style="margin:0 auto 14px;" data-i18n="rate.tag">Your Feedback</span>
+    <h2 class="sec-title" data-i18n-html="rate.title">Rate Your <em>Experience</em></h2>
+    <div class="sec-div" style="margin: 0 auto 22px;"></div>
+    <p class="sec-p" data-i18n="rate.p">We would love to hear your thoughts. Let us know how we did!</p>
+    
+    <div id="rating-form-container">
+      <div class="star-rating" id="star-rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+      </div>
+      <textarea id="rating-feedback" rows="4" data-i18n-placeholder="rate.placeholder" placeholder="Tell us about your experience..."></textarea>
+      <button type="button" id="submit-rating-btn" class="btn-fire" style="margin-top:20px; width:100%; border:none; cursor:pointer;" onclick="submitRating()" data-i18n="rate.submit">Submit Feedback</button>
+    </div>
+
+    <div id="rating-success-message" style="display:none; padding: 40px 20px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; color:var(--yellow); margin-bottom:10px;" data-i18n="rate.successTitle">Thank You! 🎉</h3>
+      <p style="color:rgba(255,255,255,.7); line-height: 1.6;" data-i18n="rate.successMsg">Your feedback has been received. We appreciate your support.</p>
+    </div>
+  </div>
+</section>
+<!-- END RATING SECTION -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
      ║  ORDER / RESERVATION SECTION                                ║
      ╚══════════════════════════════════════════════════════════════╝ -->
 <section id="order">
