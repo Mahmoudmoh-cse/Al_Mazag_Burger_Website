@@ -880,7 +880,7 @@ if(stars.length > 0) {
 }
 
 // PASTE YOUR GOOGLE SCRIPT WEB APP URL HERE:
-var GOOGLE_SHEETS_WEB_APP_URL = '';
+var GOOGLE_SHEETS_WEB_APP_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdemXPrm7VZmhFSNwqgesfyNDk34cu_mVCue2ykCVMAa4Ax4g/formResponse';
 
 function submitRating() {
   if(currentRating === 0) {
@@ -928,8 +928,8 @@ function submitRating() {
 
   // Send data to Google Sheets
   var formData = new FormData();
-  formData.append('rating', currentRating);
-  formData.append('feedback', feedbackText);
+  formData.append('entry.466460484', currentRating);
+  formData.append('entry.1314289865', feedbackText);
 
   fetch(GOOGLE_SHEETS_WEB_APP_URL, {
     method: 'POST',
